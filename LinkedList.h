@@ -4,7 +4,7 @@
 #include "Citizen.h"
 
 typedef struct nodeElem{
-    int value;
+    Citizen ciudadanos;
     struct nodeElem *next;
 } Node;
 

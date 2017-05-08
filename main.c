@@ -7,11 +7,9 @@
 int main() {
     int option = -1, id, list_size;
     Citizen c;
-    LinkedList list;
     HashTable table;
 
     init_table(&table);
-    init_list(&list);
     
     while (option != 7) 
     {

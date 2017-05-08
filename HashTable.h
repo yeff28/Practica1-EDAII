@@ -6,9 +6,8 @@
 
 #define N 1000          // number of slots in the hash table
 
-typedef struct SOMETHING3 {
-    int key;
-    Citizen ciudadanos;      
+typedef struct{
+    LinkedList list[N];
 } HashTable;
 
 void init_table(HashTable* table);
