@@ -5,21 +5,34 @@
 
 int hash_function(int key) 
 { 
-    return key % N; 
+    return key % N;  // position
 }
 
 void init_table(HashTable* table) 
 {
-    /**
-        Initializes an empty hashTable. Task 2.
-    **/
+    int i;
+    for(i=0; i<N; i++){
+        table->list[i].start=0; 
+    }
 }
 
 void clear_table(HashTable* table) 
 {
-    /**
-        Clears a hashTable. Task 2.
-    **/
+    int i, key ;
+
+    for(i=0; i<N; i++){
+        if(table->list[i].start != NULL){
+            Node* current = table->list[i].start;
+            while(current != 0){
+                table->list[i].start = current->next;
+                free(current);
+                current=table->list[i].start;
+            }
+        }
+        else{
+            printf("En la posicion %d esta vacio\n", i);
+        }
+    }   
 }
 
 Node* find_citizen_by_id(HashTable* table, int id) 
@@ -79,7 +92,8 @@ bool update_citizen_info(HashTable* table, Citizen new_info)
    b = hash_function(new_info.documento );
    Node* s = find_citizen_by_id(table, b); //position
    if(s){
-       s->value.documento = new_info.documento;
+       s->ciudadanos.documento = new_info.documento;
+       printf(" %d ", s->ciudadanos.documento);
    }
    else{
        return 0;
