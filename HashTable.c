@@ -58,9 +58,25 @@ bool exists_citizen_with_id(HashTable* table, int id)
 
 bool insert_citizen(HashTable* table, Citizen c) 
 {
-    /**
-        Inserts a Citizen in the hash table. Task 2
-    **/
+    int key = hash_function(c.documento);
+    Node* aux = (Node *) malloc (sizeof(Node));
+    aux->ciudadanos = c;
+    if(aux==NULL){
+        printf("No hay memoria disponible");
+    }else{       
+        if(table->list[key].start == 0){
+        table->list[key].start = aux;
+        return 1;
+    
+        }else{
+        Node* current = table->list[key].start;
+        while(current != 0){
+            current = current->next;
+        } 
+        current->next = aux;
+        return 0;
+        }
+    }
 }
 
 bool delete_citizen_by_id(HashTable* table, int id) 
@@ -107,6 +123,7 @@ bool update_citizen_info(HashTable* table, Citizen new_info)
 
 void print_sorted_citizens(HashTable* table) 
 {
+    
     /**
         Prints the Citizens info sorted by ID. Task 5
     **/
