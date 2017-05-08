@@ -37,9 +37,16 @@ void clear_table(HashTable* table)
 
 Node* find_citizen_by_id(HashTable* table, int id) 
 {
-    /**
-        Given an ID, return the Node of the citizen. Task 2.
-    **/
+    int key = hash_function(id);
+    if(table->list[key].start != NULL){
+        Node* current = table->list[key].start;
+        while(current != 0){
+            if(current->ciudadanos.documento == id){
+                return current;
+            }
+            current=table->list[key].start;
+        }
+    }
 }
 
 bool exists_citizen_with_id(HashTable* table, int id) 
@@ -58,9 +65,21 @@ bool insert_citizen(HashTable* table, Citizen c)
 
 bool delete_citizen_by_id(HashTable* table, int id) 
 {
-    /**
-        Deletes an existing user that has ID id. Task 2
-    **/
+    int key = hash_function(id);
+    if(table->list[id].start != NULL){
+        Node* current = table->list[key].start;
+        
+        while(current != 0){
+            if(current->ciudadanos.documento == id){
+                free(current);
+                return 1;
+            }
+            current=table->list[id].start;
+        }
+    }
+    else{
+        return 0;
+    }
 }
 
 bool insert_citizen_list(HashTable* table, LinkedList* list) 
