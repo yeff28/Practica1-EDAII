@@ -27,12 +27,12 @@ int main() {
         
         switch (option) 
         {
-            case 0: 
+            case OPT_CLR: 
                 clear_table(&table); 
                 printf("Cleared!\n"); 
                 break;
 
-            case 1: 
+            case OPT_FIND: 
                 scan_line("Document number: ", "%i", &id);
                 Node* p = find_citizen_by_id(&table, id);
                 if (p) 
@@ -46,7 +46,7 @@ int main() {
                 }
                 break;
 
-            case 2:
+            case OPT_INSERT_C:
                 c = read_citizen();
                 if(insert_citizen(&table, c))
                 {
@@ -58,19 +58,19 @@ int main() {
                 };
                 break;
 
-            case 3:
+            case OPT_INSERT_LIST :
                 scan_line("Number of citizens to insert: ", "%i", &list_size);
-                clear_list(&list);
+                //clear_list(&list);
 
                 while (list_size-- > 0) 
                 {
                     c = read_citizen();
-                    insert_into_list(&list, c);
+                 //   insert_into_list(&list, c);
                 }
-                insert_citizen_list(&table, &list);
+               // insert_citizen_list(&table, &list);
                 break;
 
-            case 4:
+            case OPT_UPDT:
                 c = read_citizen();
                 if (update_citizen_info(&table, c))
                 {
@@ -82,7 +82,7 @@ int main() {
                 };
                 break;
 
-            case 5:
+            case OPT_DELETE:
                 scan_line("Document number: ", "%i", &id);
                 if (exists_citizen_with_id(&table, id)) 
                 {
@@ -95,11 +95,11 @@ int main() {
                 }
                 break;
 
-            case 6: 
+            case OPT_PRINT: 
                 print_sorted_citizens(&table); 
                 break;
 
-            case 7: 
+            case OPT_EXIT: 
                 printf("Exiting!\n"); 
                 break;
             
@@ -109,6 +109,6 @@ int main() {
         printf("======\n");
     }
     clear_table(&table); 
-    clear_list(&list); 
+   // clear_list(&list); 
     return 0;
 }

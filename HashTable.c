@@ -5,7 +5,7 @@
 
 int hash_function(int key) 
 { 
-    return key % N; 
+    return key % N;  // position
 }
 
 void init_table(HashTable* table) 
@@ -63,7 +63,8 @@ bool update_citizen_info(HashTable* table, Citizen new_info)
    b = hash_function(new_info.documento );
    Node* s = find_citizen_by_id(table, b); //position
    if(s){
-       s->value.documento = new_info.documento;
+       s->ciudadanos.documento = new_info.documento;
+       printf(" %d ", s->ciudadanos.documento);
    }
    else{
        return 0;
