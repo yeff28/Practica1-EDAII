@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "HashTable.h"
-#include "util.h"
+ 
 
 int main() {
     int option = -1, id, list_size;
