@@ -40,7 +40,7 @@ int main() {
                 if (p) 
                 {
                     printf("Found!\n");
-                    print_citizen(p->data);
+                    //print_citizen(p->data);
                 } 
                 else 
                 {

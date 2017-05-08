@@ -59,9 +59,16 @@ bool insert_citizen_list(HashTable* table, LinkedList* list)
 
 bool update_citizen_info(HashTable* table, Citizen new_info) 
 {
-    /**
-        Update Citizen Info. Task 4
-    **/
+   int b;
+   b = hash_function(new_info.documento );
+   Node* s = find_citizen_by_id(table, b); //position
+   if(s){
+       s->value.documento = new_info.documento;
+   }
+   else{
+       return 0;
+   }
+    
 }
 
 

@@ -9,6 +9,10 @@ Citizen read_citizen()
     Citizen c;
         printf("Introduzca el numero de documento: \n");
         scanf("%d", &c.documento);
+        while ( c.documento > 99999999){
+            printf("Introduzca el numero de documento: \n");
+            scanf("%d", &c.documento);
+        }
         printf("Introduzca su nombre:\n");
         scanf("%s", c.nombre);
         printf("Introduzca su apellido:\n");
