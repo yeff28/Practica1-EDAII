@@ -123,8 +123,33 @@ bool update_citizen_info(HashTable* table, Citizen new_info)
 
 void print_sorted_citizens(HashTable* table) 
 {
+    int i,j,aux;   
+    int DNIs[N];
     
-    /**
-        Prints the Citizens info sorted by ID. Task 5
-    **/
+    for(i = 0; i < N; i++){
+        //while(table->list[i] != 0){        
+            Node *current = table->list[i].start;        
+            while(current != 0){              
+                DNIs[i] = current->ciudadanos.documento;//guarda el DNI            
+                current = current->next;        
+            }
+        //}
+    }
+    for(i = 1;i < N; i++){
+        aux = DNIs[i];
+        j = i;
+        //mientras j sea mayor que 0 y el DNI del siguiente sea menor que el primero
+        while(j >= 0 && DNIs[j] < DNIs[j-1]){            
+            
+            DNIs[j] = DNIs[j-1];
+            DNIs[j-1] = aux;
+            j--;
+        }
+    
+    
+    for(i = 0;i < N; i++){
+        printf("%i",DNIs[i]);
+    }
+    
+}
 }
