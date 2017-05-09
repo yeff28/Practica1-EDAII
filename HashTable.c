@@ -40,37 +40,37 @@ Node* find_citizen_by_id(HashTable* table, int id) {
     }
 }
 
-bool exists_citizen_with_id(HashTable* table, int id) {
-
-    /**
-        Checks if a citizen with ID id exists in the hashTable. Task 2.
-     **/
+bool exists_citizen_with_id(HashTable* table, int id) 
+{
+    Node* Ciudadano = find_citizen_by_id(table, id);
+    if(Ciudadano){
+        printf("Existe el ciudadano\n");
+        return true;
+    }
+    else{
+        printf("No existe el ciudadano\n");
+        return false;
+    }
 }
 
 bool insert_citizen(HashTable* table, Citizen c) {
     int key = hash_function(c.documento);
-    
     Node* aux = (Node *) malloc(sizeof (Node));
+    aux->ciudadanos = c;
     if (aux == NULL) {
         printf("No hay memoria disponible");
     } else {
-        aux->ciudadanos = c;
-        int existe = exists_citizen_with_id(table, c.documento);
-        if(existe){
-            return false;
+        if (table->list[key].start == 0) {
+            table->list[key].start = aux;
+            return 1;
+
         } else {
-            if (table->list[key].start == 0) {
-                table->list[key].start = aux;
-                return true;
-            } 
-            else {
-                Node* current = table->list[key].start;
-                while (current != 0) {
-                    current = current->next;
-                }
-                current->next = aux;
-                return true;
+            Node* current = table->list[key].start;
+            while (current != 0) {
+                current = current->next;
             }
+            current->next = aux;
+            return 0;
         }
     }
 }
