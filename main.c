@@ -11,6 +11,7 @@ int main() {
     init_table(&table);
 
     while (option != 7) {
+        option = -1;
         printf("\n0. Clear all data.\n");
         printf("1. Find a citizen by ID.\n");
         printf("2. Insert a single citizen.\n");
@@ -38,7 +39,7 @@ int main() {
                 }
                 else {
                     printf("Not found!\n");
-                }
+                };
                 break;
 
             case OPT_INSERT_C:
@@ -49,7 +50,7 @@ int main() {
                 } 
                 else {
                     printf("Error! A citizen with that id already exists.\n");
-                }
+                };
                 break;
 
             case OPT_INSERT_LIST:
@@ -76,7 +77,7 @@ int main() {
                 }
                 else {
                     printf("Not found!\n");
-                }
+                };
                 break;
 
             case OPT_PRINT:

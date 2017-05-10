@@ -28,15 +28,20 @@ void clear_table(HashTable* table) {
 }
 
 Node* find_citizen_by_id(HashTable* table, int id) {
+    Node* current;
     int key = hash_function(id);
+    
     if (table->list[key].start != NULL) {
-        Node* current = table->list[key].start;
+        current = table->list[key].start;
         while (current != 0) {
             if (current->ciudadanos.documento == id) {
                 return current;
             }
             current = table->list[key].start;
         }
+    }
+    else{
+        current;
     }
 }
 
@@ -76,19 +81,34 @@ bool insert_citizen(HashTable* table, Citizen c) {
 }
 
 bool delete_citizen_by_id(HashTable* table, int id) {
+    printf("Estoy en la funcion delete_citizen\n");
     int key = hash_function(id);
-    if (table->list[id].start != NULL) {
+    if (table->list[key].start != NULL) {
+        printf("Procedo a borrar el ciudadano\n");
         Node* current = table->list[key].start;
-
-        while (current != 0) {
-            if (current->ciudadanos.documento == id) {
-                free(current);
-                return 1;
+        if(current->next == 0 && current->ciudadanos.documento == id){
+            printf("Es el primer elemento\n");
+            free(current);
+            table->list[key].start = NULL;
+            return true;
+        }
+        else{
+            Node* previous = current;
+            current = current->next;
+            while (current != 0) {
+                if (current->ciudadanos.documento == id) {
+                    printf("He entrado dentro del if\n");
+                    previous->next=current->next;
+                    free(current);
+                    return true;
+                }
+                previous = current;
+                current = current->next;
             }
-            current = table->list[id].start;
         }
     } else {
-        return 0;
+        printf("No puedo borrarlo\n");
+        return false;
     }
 }
 
@@ -108,16 +128,20 @@ bool insert_citizen_list(HashTable* table, int list_size)
 }
 
 bool update_citizen_info(HashTable* table, Citizen new_info) {
-    int b;
-    b = hash_function(new_info.documento);
-    Node* s = find_citizen_by_id(table, b); //position
-    if (s) {
+    printf("Estoy en la funcion update\n");
+    
+    Node* s = find_citizen_by_id(table, new_info.documento); //position
+    printf("El documento es %d y el nombre es %s\n", s->ciudadanos.documento, s->ciudadanos.nombre);
+    if(s){
+        printf("Existe\n");
         s->ciudadanos = new_info;
         printf(" %d ", s->ciudadanos.documento);
         return true;
     } else {
+        printf("No Existe\n");
         return false;
     }
+}
 
 void print_sorted_citizens(HashTable* table) 
 {

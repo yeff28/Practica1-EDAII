@@ -5,7 +5,6 @@
 
 #define MAX_NOM 20
 #define MAX_APE 40
-#define N 10
 
 typedef struct{
         int dia;
