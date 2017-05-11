@@ -131,7 +131,6 @@ bool update_citizen_info(HashTable* table, Citizen new_info) {
     printf("Estoy en la funcion update\n");
     
     Node* s = find_citizen_by_id(table, new_info.documento); //position
-    printf("El documento es %d y el nombre es %s\n", s->ciudadanos.documento, s->ciudadanos.nombre);
     if(s){
         printf("Existe\n");
         s->ciudadanos = new_info;
