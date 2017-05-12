@@ -30,17 +30,16 @@ void clear_table(HashTable* table) {
 Node* find_citizen_by_id(HashTable* table, int id) {
     Node* current;
     int key = hash_function(id);                //Averiguamos la posicion en nuestra TableHash
-    
     if (table->list[key].start != NULL) {       //Si la posicion que hemos obtenido existe algun elemento
-        current = table->list[key].start;       //Seleccionamos el primer elemento
-        while (current != 0) {                  //Mientras haya un elemento en nuestra LinkedList
+        current = table->list[key].start;       //Seleccionamos el primer elemento    
+        while (current != NULL) {               //Mientras haya un elemento en nuestra LinkedList
             if (current->ciudadanos.documento == id) {  //Si numero de documento es igual al que buscamos
                 return current;                         //Devolvemos el Nodo actual
             }
-            current = table->list[key].start;           //Vamos al siguiente elemento
+            current = current->next;                     //Vamos al siguiente elemento             
         }
     }
-    else{                                       //No hay ningun elemento en la posicion obtenida, por lo tanto no existe el ciudadano
+    else{                                               //No hay ningun elemento en la posicion obtenida, por lo tanto no existe el ciudadano
         current;
     }
 }
@@ -60,18 +59,18 @@ bool exists_citizen_with_id(HashTable* table, int id)
 
 bool insert_citizen(HashTable* table, Citizen c) {
     int key = hash_function(c.documento);               //Averiguamos la posicion en nuestra TableHash
-    Node* aux = (Node *) malloc(sizeof (Node));         //Reservamos memoria
+    Node* aux = (Node**) malloc(sizeof (Node));         //Reservamos memoria
     if (aux == NULL) {                                  //No hay memoria disponible
-        printf("No hay memoria disponible");            
-        return false;
+        printf("No hay memoria disponible");
     } else {                                            //Si hay memoria disponible
         aux->ciudadanos = c;                            //Introducimos los dados del ciudadano nuevo
-        if (table->list[key].start == 0) {              //Se trata del primer elemento de nuestra LinkedList
+        aux->next = NULL;                               //El next del nuevo elemento es NULL
+        if (table->list[key].start == NULL) {           //Se trata del primer elemento de nuestra LinkedList
             table->list[key].start = aux;               //Indicamos que tenemos un nuevo elemento
             return true;
-        } else {                                        //No se trata del primer elemento
+        } else {                                         //No se trata del primer elemento
             Node* current = table->list[key].start;     //Selecionamos el primer elemento
-            while (current != 0) {                      //Mientras haya un elemento en nuestra LinkedList
+            while (current->next != NULL){              //Mientras haya un next diferente a NULL
                 current = current->next;                //Selecionamos el siguiente elemento
             }
             current->next = aux;                        //Ya no hay siguiente elemento, por lo tanto le indicamos que el siguiente elemento sera el que hemos creado
