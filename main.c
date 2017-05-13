@@ -7,6 +7,7 @@ int main() {
     int option = -1, id, list_size;
     Citizen c;
     HashTable table;
+    LinkedList lista[N];
 
     init_table(&table);
 
@@ -20,10 +21,10 @@ int main() {
         printf("5. Delete a single citizen.\n");
         printf("6. Display all citizens in order of increasing ID.\n");
         printf("7. Exit\n\n");
-
-        scan_line("Select an option: ", " %d", &option);
-        printf("Option %d selected\n======\n", option);
-
+        scanf("%d", &option);
+        while(getchar() != '\n'){
+            printf("Introduce un numero, no una letra\n");
+        }
         switch (option) {
             case OPT_CLR:
                 clear_table(&table);
@@ -35,7 +36,7 @@ int main() {
                 Node* p = find_citizen_by_id(&table, id);
                 if (p) {
                     printf("Found!\n");
-                    //print_citizen(p->data);
+                    print_citizen(p->ciudadanos);
                 }
                 else {
                     printf("Not found!\n");
@@ -55,9 +56,24 @@ int main() {
 
             case OPT_INSERT_LIST:
                 scan_line("Number of citizens to insert: ", "%i", &list_size);
-                //clear_list(&list)
-                    insert_citizen_list(&table, list_size);
-                // insert_citizen_list(&table, &list);
+                init_list(lista);
+                printf("el numero de usuarios es %d\n", list_size);
+                while (list_size-- > 0) 
+                {
+                     c = read_citizen();
+                     int id = hash_function(c.documento);               //Averiguamos la posicion en nuestra TableHash
+                     int existe = exists_citizen_with_id(&table, c.documento);
+                     if (existe == true){
+                        printf("El ciudadano ya existe\n");
+                    }
+                    else{
+                        table.num_ciudadanos++;
+                        insert_into_list(&lista[id], c);
+                    }
+                }
+
+                insert_citizen_list(&table, &lista);
+
                 break;
 
             case OPT_UPDT:
