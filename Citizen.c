@@ -9,26 +9,18 @@ Citizen read_citizen() {
     Citizen c;
     printf("Introduzca el numero de documento: \n");
     scanf("%d", &c.documento);
- 
     while (c.documento > 99999999 ){
         printf("Introduzca el numero de documento: \n");
         scanf("%d", &c.documento);
-    
     }
     printf("Introduzca su nombre:\n");
     scanf("%s", c.nombre);
     printf("Introduzca su apellido:\n");
     scanf("%s", c.apellido);
- 
-   do{
-        
+   do{   
    printf("Introduzca su fecha de nacimiento(dd/mm/yyyy):\n");
    scanf("%d%*c%d%*c%d", &c.fecha_nacimiento.dia,&c.fecha_nacimiento.mes,&c.fecha_nacimiento.any);
-    
    } while ((c.fecha_nacimiento.dia%30+1),(c.fecha_nacimiento.dia%12+1), (c.fecha_nacimiento.dia%2017+1));
-       
- 
-   
     printf("Introduzca su sexo(M/F):\n");
     scanf(" %c", &c.sexo);
     return c;
@@ -36,11 +28,13 @@ Citizen read_citizen() {
 
 void print_citizen(Citizen c) 
 {
-    printf("DNI:%i\n",c.documento);
+    printf("\n=============================\n");
+    printf("DNI: %d\n",c.documento);
     printf("Nombre:%s\n",c.nombre);
     printf("Apellido:%s\n",c.apellido);
     printf("Sexo:%c\n",c.sexo);
-    printf("Dia nacimiento:%i\n",c.fecha_nacimiento.dia);
-    printf("Mes nacimiento:%i\n",c.fecha_nacimiento.mes);
-    printf("Año nacimiento:%i\n",c.fecha_nacimiento.any);
+    printf("Dia nacimiento:%d\n",c.fecha_nacimiento.dia);
+    printf("Mes nacimiento:%d\n",c.fecha_nacimiento.mes);
+    printf("Año nacimiento:%d\n",c.fecha_nacimiento.any);
+    printf("=============================\n");
 }
