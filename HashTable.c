@@ -12,6 +12,7 @@ void init_table(HashTable* table) {
     for (i = 0; i < N; i++) {               //Nos movemos por nuestra tabla hash
         table->list[i].start = NULL;     //Indicamos que no tenemos ningun elemento en nuestra LinkedList 
     }
+    table->num_ciudadanos = 0;
 }
 
 void clear_table(HashTable* table) {
@@ -59,12 +60,18 @@ bool exists_citizen_with_id(HashTable* table, int id)
 
 bool insert_citizen(HashTable* table, Citizen c) {
     int key = hash_function(c.documento);               //Averiguamos la posicion en nuestra TableHash
+    int existe = exists_citizen_with_id(table, c.documento);
+    if (existe == true){
+        printf("El ciudadano ya existe\n");
+        return false;
+    }
     Node* aux = (Node**) malloc(sizeof (Node));         //Reservamos memoria
     if (aux == NULL) {                                  //No hay memoria disponible
         printf("No hay memoria disponible");
     } else {                                            //Si hay memoria disponible
         aux->ciudadanos = c;                            //Introducimos los dados del ciudadano nuevo
         aux->next = NULL;                               //El next del nuevo elemento es NULL
+        table->num_ciudadanos++;
         if (table->list[key].start == NULL) {           //Se trata del primer elemento de nuestra LinkedList
             table->list[key].start = aux;               //Indicamos que tenemos un nuevo elemento
             return true;
@@ -127,7 +134,6 @@ bool insert_citizen_list(HashTable* table, int list_size)
 }
 
 bool update_citizen_info(HashTable* table, Citizen new_info) {
-    printf("Estoy en la funcion update\n");
     
     Node* s = find_citizen_by_id(table, new_info.documento); //position
     if(s){
@@ -141,35 +147,26 @@ bool update_citizen_info(HashTable* table, Citizen new_info) {
     }
 }
 
-void print_sorted_citizens(HashTable* table) 
-{
-    int i,j,aux;   
-    int DNIs[N];
+void print_sorted_citizens(HashTable* table) {
+    int tam = table->num_ciudadanos;
+    int i, j = 0;
+    int DNIS[tam];
+    Node* current;
     
-    for(i = 0; i < N; i++){
-        //while(table->list[i] != 0){        
-            Node *current = table->list[i].start;        
-            while(current != 0){              
-                DNIs[i] = current->ciudadanos.documento;//guarda el DNI            
-                current = current->next;        
+    
+    for (i = 0; i < N; i++){
+            current = table->list[i].start;
+            while (current != NULL) {
+               
+                DNIS[j] = current->ciudadanos.documento;
+                j++;
+                current = current->next;
             }
-        //}
     }
-    for(i = 1;i < N; i++){
-        aux = DNIs[i];
-        j = i;
-        //mientras j sea mayor que 0 y el DNI del siguiente sea menor que el primero
-        while(j >= 0 && DNIs[j] < DNIs[j-1]){            
-            
-            DNIs[j] = DNIs[j-1];
-            DNIs[j-1] = aux;
-            j--;
-        }
-    
-    
-    for(i = 0;i < N; i++){
-        printf("%i",DNIs[i]);
+    bubble_sort(DNIS, tam);
+    for (i = 0; i < tam; i++) {
+        current = find_citizen_by_id(table, DNIS[i]);
+        printf("mi dni %d tiene el nombre de %s\n", current->ciudadanos.documento, current->ciudadanos.nombre);
     }
-    
 }
-}
+
