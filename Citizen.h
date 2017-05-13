@@ -12,13 +12,12 @@ typedef struct{
         int any;
 }sfecha;
     
-typedef struct SOMETHING4{
+typedef struct{
     int documento;
     char nombre[MAX_NOM];
     char apellido[MAX_APE];
     char sexo;
-    sfecha fecha_nacimiento;  
-    int next;
+    sfecha fecha_nacimiento;
 } Citizen;
 
 Citizen read_citizen();
