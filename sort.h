@@ -1,8 +1,7 @@
 #ifndef SORT_H
 #define SORT_H
 
-/**
-	Headers for the sorting algorithm
-**/
+void bubble_sort(int DNIS[], int tam);
 
 #endif
+
