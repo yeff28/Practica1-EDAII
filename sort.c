@@ -1,13 +1,15 @@
 #include <stdlib.h>
 
-bubble_sort(int DNIS[], int tam){
-    int i, aux;
+void bubble_sort(int DNIS[], int tam) {
+    int i, aux, j;
     for (i = 0; i < tam; i++) {
-        if(i != tam-1){
-            if(DNIS[i] > DNIS[i+1]){
-                    aux = DNIS[i];
-                    DNIS[i] = DNIS[i+1];
-                    DNIS[i+1] = aux;
+        for (j = 0; j < tam; j++) {
+            if (j != tam - 1) {
+                if (DNIS[j] > DNIS[j + 1]) {
+                    aux = DNIS[j];
+                    DNIS[j] = DNIS[j + 1];
+                    DNIS[j + 1] = aux;
+                }
             }
         }
     }
