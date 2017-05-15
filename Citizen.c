@@ -20,9 +20,15 @@ Citizen read_citizen() {
    do{   
    printf("Introduzca su fecha de nacimiento(dd/mm/yyyy):\n");
    scanf("%d%*c%d%*c%d", &c.fecha_nacimiento.dia,&c.fecha_nacimiento.mes,&c.fecha_nacimiento.any);
-   } while ((c.fecha_nacimiento.dia%30+1),(c.fecha_nacimiento.dia%12+1), (c.fecha_nacimiento.dia%2017+1));
-    printf("Introduzca su sexo(M/F):\n");
+   } while ((c.fecha_nacimiento.dia<0 || c.fecha_nacimiento.dia>30),(c.fecha_nacimiento.mes>12 || c.fecha_nacimiento.mes<0), (c.fecha_nacimiento.any>2017||c.fecha_nacimiento.any<1800));
+     /* do{   
+   printf("Introduzca su fecha de nacimiento(dd/mm/yyyy):\n");
+   scanf("%d%*c%d%*c%d", &c.fecha_nacimiento.dia,&c.fecha_nacimiento.mes,&c.fecha_nacimiento.any);
+   } while ((c.fecha_nacimiento.dia%30+1),(c.fecha_nacimiento.mes%12+1 ), (c.fecha_nacimiento.any%2017+1)); */
+    do{
+   printf("Introduzca su sexo(M/F):\n");
     scanf(" %c", &c.sexo);
+    }while(c.sexo != 'M' && c.sexo != 'F');
     return c;
 }
 
