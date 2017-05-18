@@ -7,8 +7,8 @@
 
 
 typedef struct{
-    LinkedList list[N];
-    int num_ciudadanos;
+    LinkedList list[N];     //Array del LinkedList
+    int num_ciudadanos;     
 } HashTable;
 
 void init_table(HashTable* table);
