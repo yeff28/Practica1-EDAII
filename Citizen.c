@@ -4,22 +4,22 @@
 #include "util.h"
 
 
-Citizen read_citizen() {
-    //char date[LINE_LENGTH];
+Citizen read_citizen() {;
     Citizen c;
     int correcto;
     char buffer[200];
+                        
     while(1){
        printf("Introduzca el numero de documento: \n");
-       if(scanf("%d", &c.documento) != 1){
+       if(scanf("%d", &c.documento) != 1){                  //Error en el scanf
            printf("Se ha producido un error\n");
-            scanf("%s", buffer);
+            scanf("%s", buffer);                            //Cogemos los valores de más que haya introducido el usuario
        }
        else{
-           if(c.documento > 9999999 && c.documento < 99999999){
+           if(c.documento > 9999999 && c.documento < 99999999){ //Si el documento cumple los requisitos, salimos del while
                 break;
            }
-           else{
+           else{                                                //No cumple los requisitos
                printf("El numero de documento debe tener 8 digitos\n");
            }
        }
@@ -32,10 +32,10 @@ Citizen read_citizen() {
    printf("Introduzca su fecha de nacimiento(dd/mm/yyyy):\n");
    scanf("%d%*c%d%*c%d", &c.fecha_nacimiento.dia,&c.fecha_nacimiento.mes,&c.fecha_nacimiento.any);
    } while ((c.fecha_nacimiento.dia<0 || c.fecha_nacimiento.dia>30),(c.fecha_nacimiento.mes>12 || c.fecha_nacimiento.mes<0), (c.fecha_nacimiento.any>2017||c.fecha_nacimiento.any<1800));
-    do{
+    do{                                     //Comprobamos que no nos introduzca un valor incorrecto
    printf("Introduzca su sexo(M/F):\n");
     scanf(" %c", &c.sexo);
-    }while(c.sexo != 'M' && c.sexo != 'F');
+    }while(c.sexo != 'M' && c.sexo != 'F');     //Mientras el sexo no sea M o F no saldremos del while
     return c;
 }
 
