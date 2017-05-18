@@ -1,20 +1,20 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-void clear_list(Node* current) {
+void clear_list(Node* current) {            
     Node* aux;
-    while (current != NULL) {
-        aux = current->next;
-        free(current);
-        current = aux;
+    while (current != NULL) {           //Mientra haya un ciudadano
+        aux = current->next;            //Apuntamos al siguiente ciudadano
+        free(current);                  //Borramos el elemento
+        current = aux;                  //current ahora apunta al siguiente elemento
     }
 }
 
 void init_list(LinkedList lista[]){
     int i;
     
-    for(i=0; i < N; i++){
-        lista[i].start = NULL;
+    for(i=0; i < N; i++){               //Nos movemos por la linkedList
+        lista[i].start = NULL;          //Inicializamos el star con NULL
     }  
 }
 
