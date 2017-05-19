@@ -45,7 +45,6 @@ int main() {
 
             case OPT_INSERT_C:
                 c = read_citizen();
-                printf("Salimos de introducir usuario\n");
                 if (insert_citizen(&table, c)) {
                     printf("Succeeded!");
                 } 
